@@ -17,7 +17,7 @@ const pool = new Pool({
 app.get('/partner/:id', async (req, res) => {
     const client = await pool.connect();
     try {
-        const result = await client.query('SELECT 1 as codigo, partner, clientruc, client, idfacturacion, idservicio, idwhatsapp, facturl, factkey  FROM maestro WHERE idpartner = $1', [req.params.id]);
+        const result = await client.query('SELECT 1 as codigo, partner, clientruc, client, idfacturacion, idservicio, idwhatsapp, facturl, factkey, tipo, mensaje, correo, contrasenia  FROM maestro WHERE idpartner = $1', [req.params.id]);
         if (result.rows.length === 0) {
             res.json({ codigo: 0, mensaje: 'No se encontraron datos' });
             console.error(`El idpartner ${req.params.id} no se encuentra en la base de datos`);
